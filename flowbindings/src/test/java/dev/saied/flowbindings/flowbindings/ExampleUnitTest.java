@@ -1,4 +1,4 @@
-package dev.saied.flowbindings.core;
+package dev.saied.flowbindings.flowbindings;
 
 import org.junit.Test;
 
