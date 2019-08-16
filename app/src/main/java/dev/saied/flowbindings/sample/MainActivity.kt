@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -20,14 +20,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var clickCount = 0
         lifecycleScope.launch {
             button.clicks()
-                .collect(object : FlowCollector<Unit> {
-                    override suspend fun emit(value: Unit) {
-                        Toast.makeText(this@MainActivity, "clicked!", Toast.LENGTH_SHORT).show()
-                    }
-                })
+                .collect {
+                    Toast.makeText(this@MainActivity, "${++clickCount} clicks!", Toast.LENGTH_SHORT).show()
+                }
         }
     }
-
 }

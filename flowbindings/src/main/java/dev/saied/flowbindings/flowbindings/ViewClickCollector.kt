@@ -15,6 +15,8 @@ suspend fun View.clicks() = channelFlow {
     setOnClickListener {
         offer(Unit)
     }
-    awaitClose { setOnClickListener(null) }
+    awaitClose {
+        setOnClickListener(null)
+    }
 }
 

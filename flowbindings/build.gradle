@@ -33,11 +33,19 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
+    def robolectricVersion = '4.3'
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "org.robolectric:shadows-playservices:$robolectricVersion"
+    testImplementation 'androidx.test:runner:1.2.0'
+    testImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'androidx.test.ext:junit-ktx:1.1.1'
+
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.1'
 }
 repositories {
     mavenCentral()
