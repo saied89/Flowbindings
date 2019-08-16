@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,12 +20,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         var clickCount = 0
-        lifecycleScope.launch {
-            button.clicks()
-                .collect {
-                    Toast.makeText(this@MainActivity, "${++clickCount} clicks!", Toast.LENGTH_SHORT).show()
-                }
-        }
+        button.clicks()
+            .onEach {
+                Toast.makeText(this@MainActivity, "${++clickCount} clicks!", Toast.LENGTH_SHORT).show()
+            }
+            .launchIn(lifecycleScope)
+
     }
 }
