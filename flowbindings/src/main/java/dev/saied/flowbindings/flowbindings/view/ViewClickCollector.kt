@@ -1,4 +1,4 @@
-package dev.saied.flowbindings.flowbindings
+package dev.saied.flowbindings.flowbindings.view
 
 import android.view.View
 import kotlinx.coroutines.ExperimentalCoroutinesApi
