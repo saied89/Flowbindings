@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import dev.saied.flowbindings.flowbindings.view.clicks
+import dev.saied.flowbindings.flowbindings.view.longClicks
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -27,6 +28,14 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "${++clickCount} clicks!", Toast.LENGTH_SHORT).show()
             }
             .launchIn(lifecycleScope)
+
+        var longClickCount = 0
+        button.longClicks()
+            .onEach {
+                Toast.makeText(this@MainActivity, "${++longClickCount} Long clicks!", Toast.LENGTH_SHORT).show()
+            }
+            .launchIn(lifecycleScope)
+
 
     }
 }
