@@ -31,7 +31,7 @@ class TextViewChangesCollectorTest {
             }
             collectJob.cancelAndJoin() // cancel the subscription and wait for it to end
             assertEquals(strings.size, recordList.size)
-            strings.mapIndexed { index, s ->
+            strings.forEachIndexed { index, s ->
                 assertEquals(s, recordList[index].toString())
             }
         }
