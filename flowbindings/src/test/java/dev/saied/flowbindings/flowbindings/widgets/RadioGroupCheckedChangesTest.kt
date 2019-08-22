@@ -4,9 +4,8 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.saied.flowbindings.flowbindings.view.longClicks
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.produceIn
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -27,26 +26,25 @@ class RadioGroupCheckedChangesTest {
         view.addView(button2)
     }
 
+    @FlowPreview
     @ExperimentalCoroutinesApi
     @Test
     fun checkedChanges() =
         runBlocking {
-            val recordList = mutableListOf<Int>()
-            val collectJob = launch {
-                view.checkedChanges()
-                    .collect {
-                        recordList.add(it)
-                    }
-            }
+            val collectJob = Job()
+
+            val recordChannel = view.checkedChanges()
+                .produceIn(CoroutineScope(coroutineContext + collectJob))
+
             delay(500)
             view.check(1)
+            assertEquals(1, recordChannel.receive())
             view.check(2)
+            assertEquals(2, recordChannel.receive())
             view.clearCheck()
+            assertEquals(-1, recordChannel.receive())
 
             collectJob.cancelAndJoin()
-            assertEquals(3, recordList.size)
-            assertEquals(1, recordList[0])
-            assertEquals(2, recordList[1])
-            assertEquals(-1, recordList[2])
+            assert(recordChannel.isClosedForReceive)
         }
 }
