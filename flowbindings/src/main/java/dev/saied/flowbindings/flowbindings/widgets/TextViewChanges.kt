@@ -6,8 +6,16 @@ import android.widget.TextView
 import dev.saied.flowbindings.flowbindings.initValueChannelFlow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.Flow
 
+/**
+ * Create a [Flow] of character sequences that will deliver changes to text of a [TextView].
+ *
+ *  *Warning:* Emitted values are mutable and owned by the textView and thus not safe to cache
+ *  or use on other threads. Use [CharSequence.toString] to create a copy.
+ *
+ *  * *Note:* A value will be emitted immediately on subscribe.
+ */
 @ExperimentalCoroutinesApi
 fun TextView.textChanges() = initValueChannelFlow(text) {
     val textChangeWatcher: TextWatcher = object : TextWatcher {

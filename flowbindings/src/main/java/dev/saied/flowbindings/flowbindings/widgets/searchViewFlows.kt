@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.channelFlow
 /**
  * Emits when the search view query text is changed.
  * @return a [Flow] of type [String] that will receive query text changes.
+ *
+ * *Note:* A value will be emitted immediately on subscribe.
  */
 @ExperimentalCoroutinesApi
 fun SearchView.queryTextChanges() = initValueChannelFlow(query) {
