@@ -12,7 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class RadioGroupCheckedChangesTest {
+class RadioGroupCheckedChangesFlowTest {
     private val context = InstrumentationRegistry.getInstrumentation().context
     private val view = RadioGroup(context)
 

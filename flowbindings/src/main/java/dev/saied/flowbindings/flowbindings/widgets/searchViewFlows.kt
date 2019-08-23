@@ -5,7 +5,6 @@ import dev.saied.flowbindings.flowbindings.initValueChannelFlow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
 
 /**
  * Emits when the search view query text is changed.
@@ -14,7 +13,7 @@ import kotlinx.coroutines.flow.channelFlow
  * *Note:* A value will be emitted immediately on subscribe.
  */
 @ExperimentalCoroutinesApi
-fun SearchView.queryTextChanges() = initValueChannelFlow(query) {
+fun SearchView.queryTextChanges(): Flow<CharSequence> = initValueChannelFlow(query) {
     setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String): Boolean = false
 
@@ -22,24 +21,6 @@ fun SearchView.queryTextChanges() = initValueChannelFlow(query) {
             offer(newText)
             return true
         }
-    })
-
-    awaitClose { setOnQueryTextListener(null) }
-}
-
-/**
- * Emits when user submits the query.
- * @return a [Flow] of type [String] that will receive query submissions.
- */
-@ExperimentalCoroutinesApi
-fun SearchView.queryTextSubmits() = channelFlow {
-    setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String): Boolean {
-            offer(query)
-            return true
-        }
-
-        override fun onQueryTextChange(newText: String): Boolean = false
     })
 
     awaitClose { setOnQueryTextListener(null) }

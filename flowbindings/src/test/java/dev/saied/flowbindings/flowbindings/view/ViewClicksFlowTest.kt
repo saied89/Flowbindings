@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
-class ViewClickCollectorTest {
+class ViewClicksFlowTest {
 
     @InternalCoroutinesApi
     @Test
