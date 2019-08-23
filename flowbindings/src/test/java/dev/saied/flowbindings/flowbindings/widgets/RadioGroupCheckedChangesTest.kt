@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class RadioGroupCheckedChangesTest {
-    val context = InstrumentationRegistry.getInstrumentation().context
+    private val context = InstrumentationRegistry.getInstrumentation().context
     private val view = RadioGroup(context)
 
     @Before
@@ -37,6 +37,7 @@ class RadioGroupCheckedChangesTest {
                 .produceIn(CoroutineScope(coroutineContext + collectJob))
 
             delay(500)
+            assertEquals(-1, recordChannel.receive())
             view.check(1)
             assertEquals(1, recordChannel.receive())
             view.check(2)
