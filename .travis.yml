@@ -23,7 +23,7 @@ android:
     - sys-img-armeabi-v7a-addon-google_apis-google-$EMU_ANDROID_API
     - sys-img-armeabi-v7a-android-$EMU_ANDROID_API
     - extra-android-support
-licenses:
+    licenses:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
     - google-gdk-license-.+
