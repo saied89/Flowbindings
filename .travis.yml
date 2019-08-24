@@ -4,44 +4,44 @@ jdk: oraclejdk8
 
 env:
   global:
-  - ANDROID_API=29
-  - EMU_ANDROID_API=21
-  - ANDROID_BUILD_TOOLS=29.0.0
+    - ANDROID_API=29
+    - EMU_ANDROID_API=21
+    - ANDROID_BUILD_TOOLS=29.0.0
 
 android:
   components:
-  - tools
-  - tools
-  - platform-tools
-  - build-tools-$ANDROID_BUILD_TOOLS
-  - android-$ANDROID_API
-  - android-$EMU_ANDROID_API
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - addon-google_apis-google-$ANDROID_API
-  - sys-img-armeabi-v7a-addon-google_apis-google-$EMU_ANDROID_API
-  - sys-img-armeabi-v7a-android-$EMU_ANDROID_API
-  - extra-android-support
+    - tools
+    - tools
+    - platform-tools
+    - build-tools-$ANDROID_BUILD_TOOLS
+    - android-$ANDROID_API
+    - android-$EMU_ANDROID_API
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-$ANDROID_API
+    - sys-img-armeabi-v7a-addon-google_apis-google-$EMU_ANDROID_API
+    - sys-img-armeabi-v7a-android-$EMU_ANDROID_API
+    - extra-android-support
   licenses:
-  - android-sdk-preview-license-.+
-  - android-sdk-license-.+
-  - google-gdk-license-.+
-K
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+
 before_install:
-- yes | sdkmanager "platforms;android-29"
-- chmod +x gradlew
-- "./gradlew dependencies || true"
+  - yes | sdkmanager "platforms;android-29"
+  - chmod +x gradlew
+  - "./gradlew dependencies || true"
 
 before_cache:
-- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-  - "$HOME/.gradle/caches/"
-  - "$HOME/.gradle/wrapper/"
-  - "$HOME/.android/build-cache"
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
+    - "$HOME/.android/build-cache"
 
 script:
-- android list target
-- "./gradlew clean build"
+  - android list target
+  - "./gradlew clean build"
