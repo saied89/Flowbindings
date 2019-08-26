@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 fun RadioGroup.checkedChanges(): Flow<Int?> = initValueChannelFlow(checkedRadioButtonId) {
     var lastChecked: Int = checkedRadioButtonId
 
-    setOnCheckedChangeListener { group, checkedId ->
+    setOnCheckedChangeListener { _, checkedId ->
         if (checkedId != lastChecked) {
             lastChecked = checkedId
             offer(lastChecked)
