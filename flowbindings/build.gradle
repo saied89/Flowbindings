@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion = '0.8.4'
+    toolVersion = "0.8.4"
 }
 
 tasks.withType(Test) {
