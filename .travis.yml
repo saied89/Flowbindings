@@ -24,9 +24,9 @@ android:
     - sys-img-armeabi-v7a-android-$EMU_ANDROID_API
     - extra-android-support
     licenses:
-    - android-sdk-preview-license-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
+      - android-sdk-preview-license-.+
+      - android-sdk-license-.+
+      - google-gdk-license-.+
 
 before_install:
   - yes | sdkmanager "platforms;android-29"
