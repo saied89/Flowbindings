@@ -44,6 +44,6 @@ cache:
 
 script:
 - android list target
-- "./gradlew clean check"
+- "./gradlew jacocoTestReport"
 after_success:
 - bash <(curl -s https://codecov.io/bash)
