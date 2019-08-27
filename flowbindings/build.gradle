@@ -2,16 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'jacoco-android'
-apply plugin: 'com.novoda.bintray-release'
-
-publish {
-    userOrg = 'dev'
-    groupId = 'saied'
-    artifactId = 'flowbindings'
-    publishVersion = '0.0.1'
-    desc = 'Android bindings for Kotlin Flows'
-    website = 'https://github.com/saied89/Flowbindings'
-}
 
 jacoco {
     toolVersion = "0.8.4"

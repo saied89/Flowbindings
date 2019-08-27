@@ -1,13 +1,11 @@
 sudo: false
 language: android
 jdk: oraclejdk8
-
 env:
   global:
   - ANDROID_API=28
   - EMU_ANDROID_API=21
   - ANDROID_BUILD_TOOLS=28.0.3
-
 android:
   components:
   - tools
@@ -27,12 +25,10 @@ android:
   - android-sdk-preview-license-.+
   - android-sdk-license-.+
   - google-gdk-license-.+
-
 before_install:
-  - yes | sdkmanager "platforms;android-28"
-  - chmod +x gradlew
-  - "./gradlew dependencies || true"
-
+- yes | sdkmanager "platforms;android-28"
+- chmod +x gradlew
+- "./gradlew dependencies || true"
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -41,9 +37,16 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
   - "$HOME/.android/build-cache"
-
 script:
 - android list target
 - "./gradlew jacocoTestReport"
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+deploy:
+  provider: bintray
+  file: flowbindings/build/outputs/aar/flowbindings-release.aar
+  skip_cleanup: true
+  on:
+    tags: true
+  key:
+    secure: e2KDlCOPn8EmjyvROlK8pttYPQtMIXGvGoBcI1O5zIyyTk7Ey5yzYTQg3a7MQFNuTcLB5BzvXEeaBu8OfGHXcMzWqSzsw9GKuOuHVDtCZT1oC/Z/hUDJLy0gG/FRY29ARGJoDimHP0uYfySndtpDZoR2u3lSWM2Hmn9prRKFqdOsNaY0/xBmbgOL4wYiZx+LI88lUoXQl/GwkJdYpEdQxglHIPrbtnOmcPx7IS8p2FsxeryyAS/ThR+J1n/VdMHVVM8OfBerLYwmHPcIVj0FkWMWqjqoheG08X2h15CN63wSJjKwzWxMzGVHm60dqVRY6pS6vcEP/z+0OYsJNpGb90nP2zb1/O8KgB8Vq2rkv60Z2g+wgR12cbUdAnCDaPuHcn4FfylKo0905SOCtyObjTYBym19AN3SvY90TY1ZihShyEWH1mswEXZqzQphzjtw/D4VcjbLu1VKih0uauQ/qQPbSOWvnZHbR22tMWBFz0wxYrAJMYCDTmbfbtCcpBMRiMBjNm0bcLbSW7ER2wiokgKoUQ0nouW2wLT58ZnDyRUdCOH8ILQhdEFFEHeLdY1d5O6b0AW5xIipvt9ggWhfzwYKSju7nl8kMtKIz1uKULG25gc022mi9C7HqTubQi4lK5XkihitIy8RtQ4FRim/Wo6M0/t6z7h3fdftqRMpn2Y=
