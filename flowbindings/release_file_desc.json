@@ -1,0 +1,21 @@
+{
+  "package": {
+    "name": " dev.saied.flowbindings.flowbindings",
+    "repo": "Flowbindings",
+    "subject": "saied89",
+    "vcs_url": "https://github.com/saied89/Flowbindings",
+    "licenses": [
+      "Apache-2.0"
+    ],
+    "public_stats": false
+  },
+  "version": {
+    "name": "0.1"
+  },
+  "files": [
+    {
+      "includePattern": "flowbindings/build/outputs/aar/flowbindings-release.aar"
+    }
+  ],
+  "publish": true
+}

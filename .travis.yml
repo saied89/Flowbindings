@@ -44,7 +44,7 @@ after_success:
 - bash <(curl -s https://codecov.io/bash)
 deploy:
   provider: bintray
-  file: flowbindings/build/outputs/aar/flowbindings-release.aar
+  file: "flowbindings/release_file_desc.json"
   skip_cleanup: true
   on:
     tags: true
