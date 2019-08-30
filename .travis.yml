@@ -39,7 +39,7 @@ cache:
   - "$HOME/.android/build-cache"
 script:
 - android list target
-- "./gradlew jacocoTestReport"
+- "./gradlew clean build jacocoTestReport"
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 deploy:
