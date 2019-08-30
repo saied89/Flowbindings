@@ -45,6 +45,8 @@ after_success:
 deploy:
   provider: bintray
   file: "flowbindings/release_file_desc.json"
+  edge:
+    branch: dpl-2
   skip_cleanup: true
   on:
     tags: true
